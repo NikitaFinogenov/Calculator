@@ -40,16 +40,20 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun mainScreen() {
 
-    var a = 0
+    var a by rememberSaveable() {
+        mutableStateOf(1)
+    }
     var alisa by rememberSaveable() {
         mutableStateOf("")
     }
     var result by rememberSaveable() {
         mutableStateOf(0)
     }
+    //var result = 0
     var garrry by rememberSaveable() {
         mutableStateOf(0)
     }
+
 
 
 
@@ -69,7 +73,8 @@ fun mainScreen() {
             Button(onClick = {
                 alisa = ""
                 result = 0
-                a = 0
+                a = 1
+                garrry = 0
             }) {
                 Text(text = "C")
             }
@@ -117,12 +122,13 @@ fun mainScreen() {
             }
             Button(onClick = {
                 if (a == 1) {
-                    result = 0
+                    garrry = alisa.toInt()
                     alisa = ""
                     a = 0
                 } else {
+                    result = result + garrry - alisa.toInt()
                     garrry = alisa.toInt()
-                    result -= garrry
+                    //result -= alisa.toInt()
                     alisa = ""
                 }
             }) {
@@ -142,13 +148,15 @@ fun mainScreen() {
             Button(onClick = {
 
                 if (a == 1) {
-                    result = 0
+                    garrry = alisa.toInt()
                     alisa = ""
                     a = 0
                 } else {
+                    result += garrry + alisa.toInt()
                     garrry = alisa.toInt()
-                    result += garrry
+                    result -= alisa.toInt()
                     alisa = ""
+
                 }
                 Log.d("$garrry - G | $result - R | $alisa - A", "results")
             }) {
@@ -173,6 +181,24 @@ fun mainScreen() {
     }
 
 }
+
+/*
+alisa
++
+garry = alisa
+alisa = ""
+input: alisa
++
+result = result + garry + alisa
+garry = alisa
+alisa = ""
+input: alisa
++
+ */
+
+/*
+
+ */
 
 
 
